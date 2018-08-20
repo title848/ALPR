@@ -19,15 +19,11 @@ class opcr:
 			result = cv.matchTemplate(img3,img1,cv.TM_CCOEFF)
 			(_,score,_,_) = cv.minMaxLoc(result)
 			scores.append(score)
-		
-		for i in range(len(scores)):
-			if scores[i] == max(scores):
-				img2 = cv.imread('char/%s.jpg'%(i+1))
-				c = swcase(i+1)
-				#print(c)
-		
-		cv.imshow('img.jpg',img2)	
-		#cv.waitKey(0)
-		#cv.destroyAllWindows()
+	
+
+		Indexx = scores.index(max(scores))
+		img2 = cv.imread('char/%s.jpg'%(Indexx+1))
+		c = swcase(Indexx+1)
+
 		return(c)
 

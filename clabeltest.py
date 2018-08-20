@@ -88,45 +88,24 @@ def run(img):
         	    colors[component] = (random.randint(0,255), random.randint(0,255),random.randint(0,255))
 		outdata1[x,y] = colors[component]
     lbil = []
-
+    count10 = []
     pixeled = sorted(pixel,reverse = True)
     pixelled = []
-    for i in range(1,9):
-	pixelled.append(pixeled[i])
-    for i in range(len(pixel)):
-	 if pixel[i] != pixeled[0] and flag[0] == 0:
-		count[0]  += 1
-	 else : flag[0] = 1
-	 if pixel[i] != pixeled[1] and flag[1] == 0:
-                count[1]  += 1
-         else : flag[1] = 1
-	 if pixel[i] != pixeled[2] and flag[2] == 0:
-                count[2]  += 1
-         else : flag[2] = 1
-	 if pixel[i] != pixeled[3] and flag[3] == 0:
-                count[3]  += 1
-         else : flag[3] = 1
-	 if pixel[i] != pixeled[4] and flag[4] == 0:
-                count[4]  += 1
-         else : flag[4] = 1
-	 if pixel[i] != pixeled[5] and flag[5] == 0:
-                count[5]  += 1
-         else : flag[5] = 1
-	 if pixel[i] != pixeled[6] and flag[6] == 0:
-                count[6]  += 1
-         else : flag[6] = 1
-	 if pixel[i] != pixeled[7] and flag[7] == 0:
-                count[7]  += 1
-         else : flag[7] = 1
-	 if pixel[i] != pixeled[8] and flag[8] == 0:
-                count[8]  += 1
-         else : flag[8] = 1
-	 if pixel[i] != pixeled[9] and flag[9] == 0:
-                count[9]  += 1
-         else : flag[9] = 1
-
+    cppixel = []
+    cppixel = pixel[:]
+#    for i in range(1,9):
+#        pixelled.append(pixeled[i])
+    for j in range(0,9):
+        cppixel[0] = min(cppixel)
+        Index = cppixel.index(max(cppixel))
+        count10.append(Index)
+        pixelled.append(cppixel[Index])
+        cppixel[Index] = min(cppixel)
+    #print(pixel)
+           
+         
     for (x,y) in labels:
-        if labels[(x,y)] in count and labels[(x,y)] != 0:
+        if labels[(x,y)] in count10 and labels[(x,y)] != 0:
           #     	 if labels[(x,y)] not in character:
            #            	 character.append(labels[(x,y)])
 		component = uf.find(labels[(x, y)])
@@ -152,30 +131,23 @@ def run(img):
 			if miny[i] > y:
                                 miny[i] = y
 
-    #print(Average(pixelled))
-    print(count,pixelled)
+    #print(Average(pixelled)
     #print(characters)
     #print(minx,miny,maxx,maxy)
     listt = []
-    for i in range(len(characters)):
-        count1 = 100000
-        count2 = 0
-        count3 = 0
-        count4 = 0
-        count5 = 0
-        for j in range(len(characters)):
-            if count1 > minx[j] and characters[j] not in listt: 
-                count1 = minx[j]
-                count2 = characters[j]
-                count3 = maxx[j]
-                count4 = miny[j]
-                count5 = maxy[j] 
-        listt.append(count2)
-        maxx1.append(count3)
-        miny1.append(count4)
-        maxy1.append(count5)
-        minx1 = sorted(minx)
-    print('\n')
+
+    minxx = minx[:]
+    count11 = []
+    for ii in range(len(minxx)):
+        Index2 = minxx.index(min(minxx))
+        minx1.append(minx[Index2])
+        maxy1.append(maxy[Index2])
+        maxx1.append(maxx[Index2])
+        miny1.append(miny[Index2])
+        #count11.append(Index2)
+        minxx[Index2] = 10000
+    #print(minx1,maxx1,miny1,maxy1,minx,maxx,miny,maxy)    
+    #print('\n')
     #print(minx1,maxx1,miny1,maxy1)            
 
     return (labels, output_img,output_seg,minx1,miny1,maxx1,maxy1)
@@ -214,7 +186,6 @@ def main():
         	ch = optcr.opchr('crop' + str(i) +'.jpg')
         	cha = cha + str(ch)    	
     print(cha)
-    print(len(characters))
     #crop1[1].save('crop2.jpg')
     #crop1[2].save('crop3.jpg')
     #crop1[3].save('crop4.jpg')
