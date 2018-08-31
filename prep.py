@@ -1,3 +1,4 @@
+#Image_preprocessing 
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
@@ -14,5 +15,3 @@ cv.imshow('img1',thresh1)
 cv.imshow('img',img)
 cv.waitKey(0)
 cv.destroyAllWindows()
-
-

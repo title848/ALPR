@@ -27,30 +27,30 @@ def run(img):
  #   pixel = []
    # ret,data = cv.threshold(data1,127,255,cv.THRESH_BINARY_INV)
     for y, x in product(range(height), range(width)):
-        if data[x, y] == 255:
+        if data[x, y] == 0:
             pass
 
-        elif y > 0 and data[x, y-1] == 0:
+        elif y > 0 and data[x, y-1] == 255:
             labels[x, y] = labels[(x, y-1)]
 
-        elif x+1 < width and y > 0 and data[x+1, y-1] == 0:
+        elif x+1 < width and y > 0 and data[x+1, y-1] == 255:
             c = labels[(x+1, y-1)]
             labels[x, y] = c
 
-            if x > 0 and data[x-1, y-1] == 0:
+            if x > 0 and data[x-1, y-1] == 255:
                 a = labels[(x-1, y-1)]
                 uf.union(c, a)
 
-            elif x > 0 and data[x-1, y] == 0:
+            elif x > 0 and data[x-1, y] == 255:
                 d = labels[(x-1, y)]
                 uf.union(c, d)
 
 
-        elif x > 0 and y > 0 and data[x-1, y-1] == 0:
+        elif x > 0 and y > 0 and data[x-1, y-1] == 255:
             labels[x, y] = labels[(x-1, y-1)]
 	   # pixel[labels[x, y]]  +=1
 
-        elif x > 0 and data[x-1, y] == 0:
+        elif x > 0 and data[x-1, y] == 255:
             labels[x, y] = labels[(x-1, y)]
 	   # pixel[labels[x, y]]  +=1
 
@@ -203,7 +203,7 @@ def main():
         		crop1.append(cropx)
         except IndexError:	
         	if abs(miny1[i] - miny1[i-1] ) < 25 or abs(maxy1[i] - maxy1[i-1]) < 25:		
-        		cropx = img.crop((minx1[i],miny1[i],maxx1[i],maxy1[i])) 
+        		cropx = img.crop((minx1[i]-10,miny1[i]-10,maxx1[i]+10,maxy1[i]+10)) 
         		crop1.append(cropx)
 
         	#crop1[i].save('crop' + str(i) +'.jpg')
