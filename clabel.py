@@ -1,3 +1,4 @@
+#main segmentation and ocr program
 import timeit
 import numpy.core.multiarray
 import Image, ImageDraw

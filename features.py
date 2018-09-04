@@ -1,3 +1,4 @@
+#test test test
 import matplotlib.pyplot as plt
 import numpy as np 
 from sklearn import svm
@@ -8,9 +9,8 @@ import pandas as pd
 from skimage.feature import hog
 from skimage import data, exposure
 
-im = cv.imread('bolt.png')
-im = np.float32(im) / 255.0
-
-# Calculate gradient 
-gx = cv.Sobel(im, cv.CV_64F, 1, 0, ksize=1)
-gy = cv.Sobel(im, cv.CV_64F, 0, 1, ksize=1)
+digit = pd.read_csv('train.csv')
+digit.head()
+data =[]
+data = digit['label'].tolist()
+print(data)
