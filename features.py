@@ -9,8 +9,12 @@ import pandas as pd
 from skimage.feature import hog
 from skimage import data, exposure
 
-digit = pd.read_csv('train.csv')
-digit.head()
-data =[]
-data = digit['label'].tolist()
-print(data)
+im = cv.imread('1.JPEG')
+im = np.float32(im) / 255.0
+
+gx = cv.Sobel(im, cv.CV_32F, 1, 0, ksize=1)
+gy = cv.Sobel(im, cv.CV_32F, 0, 1, ksize=1)
+
+mag, angle = cv.cartToPolar(gx, gy, angleInDegrees=True)
+
+print(angle)
